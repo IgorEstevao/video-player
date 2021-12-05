@@ -7,7 +7,6 @@
 
 var player = document.getElementById('player');
 var playerContainer = document.getElementById('video-player');
-var i = 0;
 var currentTime = 0;
 var videoDuration = 0;
 var thumbnailContainer = document.createElement("div");
