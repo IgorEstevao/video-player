@@ -1,0 +1,15 @@
+#video-player{
+  position: relative;
+  background-color:red;
+  padding: 20px;
+  display: inline-flex;
+}
+
+.thumbnail-container{
+  position: absolute;
+  background-color:green;
+  width: 150px;
+  height: 100px;
+  top: 100%;
+}
+
