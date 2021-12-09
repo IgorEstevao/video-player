@@ -7,23 +7,22 @@
 
 var player = document.getElementById('player');
 var playerContainer = document.getElementById('video-player');
+var progressBar = document.getElementById('progress-bar');
 var currentTime = 0;
 var videoDuration = 0;
 var thumbnailContainer = document.createElement("div");
 var canvasImage = document.createElement("canvas");
 var videoIsPlaying = false;
 
-player.addEventListener('mouseleave', (e) => {
+progressBar.addEventListener('mouseleave', (e) => {
   var el = document.getElementById('thumbnail-preview');
   if (videoIsPlaying && el != null) {
     el.remove()
   }
 });
 
-
-//TODO: pegar evento de stop, para n mostrar o preview 
 //TODO: mostrar o preview apenas qunado dar hover na barra de progresso (atualemnte esta no video todo) 
-player.addEventListener('mouseenter', (e) => {
+progressBar.addEventListener('mouseenter', (e) => {
   if (videoIsPlaying) {
     thumbnailContainer.classList.add('thumbnail-container');
     thumbnailContainer.setAttribute("id", "thumbnail-preview")
@@ -32,7 +31,7 @@ player.addEventListener('mouseenter', (e) => {
   }
 });
 
-player.addEventListener('mousemove', (e) => {
+progressBar.addEventListener('mousemove', (e) => {
   const safeOffset = 80;
   thumbnailContainer.style.left = `${(e.clientX) - safeOffset}px`;
 });
@@ -59,4 +58,26 @@ player.addEventListener('seeked', (_) => {
 function generateThumbnail() {
   var canvasContext = canvasImage.getContext('2d');
   canvasContext.drawImage(player, 0, 0, 150, 100);
+}
+
+function play() {
+  if (videoIsPlaying) {
+    videoIsPlaying = false;
+    player.pause()
+  } else {
+    videoIsPlaying = true;
+    player.play();
+    var listenduration = setInterval(() => playEvent(listenduration), 100);
+  }
+}
+
+function playEvent(listenduration) {
+  if (!videoIsPlaying) {
+    clearInterval(listenduration);
+  }
+  var barPercentage = (player.currentTime / videoDuration) * 100;
+  progressBar.style.width = `${barPercentage}%`
+  if (barPercentage == 100) {
+    clearInterval(listenduration);
+  }
 }

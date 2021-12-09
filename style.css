@@ -2,7 +2,8 @@
   position: relative;
   background-color:red;
   padding: 20px;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
 }
 
 .thumbnail-container{
@@ -11,5 +12,12 @@
   width: 150px;
   height: 100px;
   top: 100%;
+}
+
+#progress-bar{
+  background-color: blue;
+  height: 30px;
+  width: 1px;
+  transition: all 500ms;
 }
 
